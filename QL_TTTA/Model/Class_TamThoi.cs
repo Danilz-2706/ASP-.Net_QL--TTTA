@@ -44,7 +44,7 @@ namespace QL_TTTA.Model
         public string TenTS { get; set; }
         public string SDT { get; set; }
         public float DiemDoc, DiemNghe, DiemNoi, DiemViet;
-        public ThiSinh(int x, string y) { MaTS = x; TenTS = y; }
+        public ThiSinh(int x, string y, string z) { MaTS = x; TenTS = y; SDT = z; }
 
     }
 }

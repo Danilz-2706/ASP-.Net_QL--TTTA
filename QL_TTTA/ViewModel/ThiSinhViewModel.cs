@@ -28,7 +28,7 @@ namespace QL_TTTA.ViewModel
         }
         private bool Filter(object obj)
         {
-            if (obj is ThiSinh pt) return pt.TenTS.Contains(ListFilter, StringComparison.InvariantCultureIgnoreCase);
+            if (obj is ThiSinh pt) return pt.TenTS.Contains(ListFilter, StringComparison.InvariantCultureIgnoreCase) || pt.SDT.Contains(ListFilter, StringComparison.InvariantCultureIgnoreCase);
             return false;
         }
         public ThiSinhViewModel()
@@ -44,22 +44,21 @@ namespace QL_TTTA.ViewModel
         private IEnumerable<ThiSinh> GetViewModels()
         {
             //return null;
-            yield return new ThiSinh(1, "Doctor");
-            yield return new ThiSinh(2, "Web Developer");
-            yield return new ThiSinh(3, "Web Developer");
-            yield return new ThiSinh(4, "Construction Worker");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(5, "Cashier");
-            yield return new ThiSinh(3, "Web Developer");
-            yield return new ThiSinh(3, "Web Developer");
-            yield return new ThiSinh(3, "Web Developer");
-            yield return new ThiSinh(3, "Web Developer");
-            yield return new ThiSinh(5, "Cashier");
+            yield return new ThiSinh(1, "Doctor","0123456789");
+            yield return new ThiSinh(2, "Web Developer", "33");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(5, "Cashier", "333");
+            yield return new ThiSinh(5, "Cashier", "11");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(5, "Cashier", "11");
+            yield return new ThiSinh(5, "Cashier", "11");
+            yield return new ThiSinh(5, "Cashier", "11");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(3, "Web Developer", "1232");
+            yield return new ThiSinh(3, "Web Developer", "1232");
         }
     }
 }

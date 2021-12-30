@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="QL_TTTA.View.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QL_TTTA.View"
+             xmlns:admanager="clr-namespace:QL_TTTA.View.AdminManagerView"
+             mc:Ignorable="d">
+    <UserControl.Style >
+        <!--Style UserControl-->
+        <Style>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UserControl.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0.5"
+                                             To="1.0"
+                                             Duration="0:0:0.5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+    <Grid Background="#fff">
+        <TabControl>
+            <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{StaticResource ptvm}">
+                <Grid>
+                    <admanager:PhongThiView/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Khóa thi" Style="{StaticResource TabItem}">
+                <Grid>
+                    <admanager:KhoaThiView></admanager:KhoaThiView>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Giáo viên" Style="{StaticResource TabItem}">
+                <Grid>
+                    <admanager:GiaoVienView></admanager:GiaoVienView>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Trình độ" Style="{StaticResource TabItem}">
+                <Grid>
+                    <admanager:TrinhDoView></admanager:TrinhDoView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{StaticResource tsvm}">
+                <Grid>
+                    <admanager:ThiSinhView></admanager:ThiSinhView>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

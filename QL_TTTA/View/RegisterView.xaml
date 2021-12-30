@@ -1,0 +1,331 @@
+﻿<UserControl x:Class="QL_TTTA.View.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QL_TTTA.View"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <Grid>
+        <materialDesign:Card>
+            <Grid Style="{StaticResource bgcontent}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Style="{StaticResource bgheader}" Grid.Row=" 0" Grid.ColumnSpan="3">
+                    <TextBlock Text="Đ Ă N G - K Ý - T H Í - S I N H"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource HeaderStyleViewChild}"/>
+                </Grid>
+                <!--Thông tin thí sinh đăng ký-->
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <!--Tìm thông tin thí sinh-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Thí sinh"  Style="{StaticResource textblockNameChild}"/>
+                        <ComboBox
+                                ItemsSource="{Binding ListTS}"
+                                DisplayMemberPath="SDT"
+                                SelectedValue="{Binding SelectedTS ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEditable="True"
+                                Style="{StaticResource comboboxChild}"
+                                materialDesign:HintAssist.HintOpacity=".26">
+                        </ComboBox>
+                    </Grid>
+                    
+                    <!--SDT-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="SĐT"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding AddSDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập số điện thoại"/>
+                        </Border>
+                    </Grid>
+                    
+                    <!--Họ tên-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Tên TS"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding AddTenTS,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập tên thí sinh"/>
+                        </Border>
+                    </Grid>
+                    
+                    <!--Giới tính-->
+                    <Grid Margin="0 16 0 8">
+                        <TextBlock  Text="Giới tính: "  Style="{StaticResource textblockNameChild}"/>
+                        <!--ItemsSource="{Binding Source={StaticResource objData}}"-->
+                        <ComboBox
+                                
+                                SelectedItem="{Binding AddGender,UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource comboboxChild}"
+                                materialDesign:HintAssist.HintOpacity=".26">
+                        </ComboBox>
+                    </Grid>
+                    <!--Ngày sinh-->
+                    <Grid Margin="0 8 0 8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Text="Ngày sinh" 
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource textblockNameChild}"/>
+                        <DatePicker Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Margin="30 0 5 0" 
+                                    IsEnabled="False"
+                                    SelectedDate="{Binding AddNgaySinh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    materialDesign:HintAssist.Hint="Ngày Sinh"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                    IsTodayHighlighted="False" />
+
+                    </Grid>
+                    <!--CMND-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="CMND"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding AddCMND,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập CMND"/>
+                        </Border>
+                    </Grid>
+                    
+                    <!--Email-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Email"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding AddEmail,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập email"/>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+
+                <!--Chọn Khóa thi - Trình độ-->
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <!--Trình độ-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Chọn trình độ"  Style="{StaticResource textblockNameChild}"/>
+                        <ComboBox
+                                ItemsSource="{Binding ListTD}"
+                                DisplayMemberPath="TenKhoa"
+                                SelectedValue="{Binding SelectedTD ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEditable="True"
+                                Style="{StaticResource comboboxChild}"
+                                materialDesign:HintAssist.HintOpacity=".26">
+                        </ComboBox>
+                    </Grid>
+                    
+                    <!--Khóa thi-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Chọn khóa thi"  Style="{StaticResource textblockNameChild}"/>
+                        <ComboBox
+                                ItemsSource="{Binding ListKT}"
+                                DisplayMemberPath="TenKhoa"
+                                SelectedValue="{Binding SelectedKT ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEditable="True"
+                                Style="{StaticResource comboboxChild}"
+                                materialDesign:HintAssist.HintOpacity=".26">
+                        </ComboBox>
+                    </Grid>
+                    
+                    <!--Ngày thi-->
+                    <Grid Margin="0 8 0 8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Text="Ngày Thi" 
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource textblockNameChild}"/>
+                        <DatePicker Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Margin="30 0 5 0" 
+                                    IsEnabled="False"
+                                    SelectedDate="{Binding SelectedKT.NgayThi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    materialDesign:HintAssist.Hint="Ngày Thi"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                    IsTodayHighlighted="False" />
+
+                    </Grid>
+                </StackPanel>
+            
+                <!--Lệ phí dự thi-->
+                <StackPanel Grid.Column="2" Grid.Row="1">
+                    <!--Lệ phí-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Lệ phí thi"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding LePhi, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="False"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Lệ phí"/>
+                        </Border>
+                    </Grid>
+
+                    <!--Đề mẫu-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Bộ đề mẫu"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding DeMau, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="False"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Đề mẫu"/>
+                        </Border>
+                    </Grid>
+
+                    <!--Miễn giảm-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Miễn Giảm"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding MienGiam, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="False"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Miễn giảm"/>
+                        </Border>
+                    </Grid>
+
+                    <!--Tổng tiền-->
+                    <Grid Margin="0 8 0 8">
+                        <TextBlock  Text="Tổng tiền"  Style="{StaticResource textblockNameChild}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding TongTien, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="False"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Tổng tiền"/>
+                        </Border>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--//Hoàn tác//-->
+                        <Button
+                                Grid.Column="0"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                BorderBrush="#C4C4C4"
+                                Margin="10 0 5 0"
+                                Command="{Binding Reset}"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                ToolTip="Hoàn tác">
+
+                            <TextBlock Text="Hoàn Tác" Style="{StaticResource fontsizeTextBlock}"/>
+                        </Button>
+                        <!--//Đăng ký//-->
+                        <Button
+                                Grid.Column="2"
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Command="{Binding Register}"
+                                Margin="5 0 10 0"
+                                ToolTip="Đăng ký">
+                            <TextBlock Text="Đăng ký" Style="{StaticResource fontsizeTextBlock}"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+
+</UserControl>

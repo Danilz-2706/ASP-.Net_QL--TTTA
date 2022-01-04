@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace QL_TTTA.ViewModel
 {
-    class ThiSinhViewModel
+    public class ThiSinhViewModel
     {
         private ObservableCollection<ThiSinh> _listTS;
         public ICollectionView ListTS { get; }

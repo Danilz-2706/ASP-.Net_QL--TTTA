@@ -4,8 +4,8 @@
                     xmlns:v="clr-namespace:QL_TTTA.View">
     
     <vm:MainWindowViewModel x:Key="mvm"></vm:MainWindowViewModel>
-    <vm:PhongThiViewModel x:Key="ptvm"></vm:PhongThiViewModel>
-    <vm:ThiSinhViewModel x:Key="tsvm"></vm:ThiSinhViewModel>
+    <!-- <vm:PhongThiViewModel x:Key="ptvm"></vm:PhongThiViewModel>
+    <vm:ThiSinhViewModel x:Key="tsvm"></vm:ThiSinhViewModel>-->
 
     <DataTemplate DataType="{x:Type vm:AdminViewModel}">
         <v:AdminView/>

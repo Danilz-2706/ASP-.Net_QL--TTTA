@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace QL_TTTA.ViewModel
 {
-    class MainWindowViewModel:BaseViewModel
+    public class MainWindowViewModel:BaseViewModel
     {
         private CollectionViewSource MenuItemsCollection;
         public ICollectionView SourceCollection => MenuItemsCollection.View;

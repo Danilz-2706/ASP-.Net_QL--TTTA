@@ -1,4 +1,5 @@
-﻿using QL_TTTA.Model;
+﻿using Domain.Interfaces;
+using QL_TTTA.Model;
 using QL_TTTA.View.AdminManagerView;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace QL_TTTA.ViewModel
 {
     public class PhongThiViewModel : BaseViewModel
     {
+
         //----------------- Biến tham chiếu - biding của từng View -----------------//
         // Các biến ở PhongThiView //
         #region
@@ -166,6 +168,8 @@ namespace QL_TTTA.ViewModel
         //Các công đoạn để Tìm Kiếm//
         #region
         private string _listFilter = string.Empty;
+        private readonly IPhongThiRepository phongThiRepository;
+
         public string ListFilter
         {
             get => _listFilter;
@@ -181,9 +185,9 @@ namespace QL_TTTA.ViewModel
             return false;
         }
         #endregion
-        public PhongThiViewModel()
+        public PhongThiViewModel(IPhongThiRepository phongThiRepository)
         {
-
+            this.phongThiRepository = phongThiRepository;
             _listPhongThi = new ObservableCollection<PhongThi>();
             foreach (var i in GetViewModels()) { _listPhongThi.Add(i); }
             ListPhongThi = CollectionViewSource.GetDefaultView(_listPhongThi);
@@ -210,6 +214,7 @@ namespace QL_TTTA.ViewModel
             #endregion
         }
         // Danh sách tạm //
+
         private IEnumerable<PhongThi> GetViewModels()
         {
             yield return new PhongThi(1, "Doctor");

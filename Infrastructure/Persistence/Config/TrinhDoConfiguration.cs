@@ -9,7 +9,7 @@ namespace Infrastructure.Persistence.Config
         public void Configure(EntityTypeBuilder<TrinhDo> builder)
         {
             builder.ToTable("TrinhDo");
-            builder.HasKey(td => td.TenTrinhDo);
+            builder.HasKey(td => td.MaTrinhDo);
             builder.HasData(
                 new TrinhDo { MaTrinhDo ="A2",TenTrinhDo = "A2" },
                 new TrinhDo { MaTrinhDo = "B1", TenTrinhDo = "B1" }

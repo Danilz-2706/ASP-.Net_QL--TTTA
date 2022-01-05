@@ -18,6 +18,7 @@ namespace Domain.Entities
         public string NoiCap { get; set; }
         public DateTime NgayCap { get; set; }
         public string Email { get; set; }
+        public string SoBaoDanh { get; set; }
         public SoBaoDanh SBD { get; set; }
     }
 }

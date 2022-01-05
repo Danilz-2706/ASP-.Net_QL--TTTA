@@ -12,6 +12,7 @@ namespace Infrastructure.Persistence.Config
         {
             builder.ToTable("ThiSinh");
             builder.HasKey(ts => ts.CMND);
+            builder.Ignore(ts => ts.SoBaoDanh);
             //One-to-one SBD
             builder.HasOne(ts => ts.SBD).WithOne(sbd => sbd.ThiSinh).HasForeignKey<SoBaoDanh>(ts => ts.CMND);
             builder.HasData(new ThiSinh { CMND = "231852123", HoTen = "Trương Đạt Nhân", GioiTinh = Gender.MALE,NgaySinh= new DateTime(2000, 11, 03),

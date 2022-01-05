@@ -110,6 +110,26 @@ namespace QL_TTTA.ViewModel
 
         #endregion
 
+        // Các biến ở PhongThiView_ChiTiet_NhapDiem //
+        #region
+        private ThiSinh _SelectedTSDiem;
+        public ThiSinh SelectedTSDiem
+        {
+            get => _SelectedTSDiem;
+            set
+            {
+                _SelectedTS = value;
+                if (_SelectedTS != null)
+                {
+                    DiemNghe = _SelectedTSDiem.DiemNghe;
+                    DiemNoi = _SelectedTSDiem.DiemNoi;
+                    DiemDoc = _SelectedTSDiem.DiemDoc;
+                    DiemViet = _SelectedTSDiem.DiemViet;
+                }
+            }
+        }
+        #endregion
+
         // Các biến ở PhongThiView_ChiTiet_ThemTS //
         #region
         #endregion
@@ -150,6 +170,15 @@ namespace QL_TTTA.ViewModel
         public ICommand AddGV { get; set; }
         public ICommand AddGVn { get; set; }
 
+        #endregion
+
+        // Command ở PhongThiView_ChiTiet_NhapDiem //
+        #region
+        public ICommand CloseDiem { get; set; }
+        public ICommand AddDiem { get; set; }
+        public ICommand RemoveDiem { get; set; }
+        public ICommand ResetDiem { get; set; }
+        public ICommand SaveDiem { get; set; }
         #endregion
 
         // Command ở PhongThiView_ChiTiet_ThemTS //
@@ -207,8 +236,13 @@ namespace QL_TTTA.ViewModel
 
             PhongThemTS = new RelayCommand<object>(p => true, p => ThemTS(p));
             Close_PhongThemTS = new RelayCommand<object>(p => true, p => ClosePhongThemTS(p));
+
+            PhongNhapDiemNhieuTS = new RelayCommand<object>(p => true, p => NhapDiem());
+            CloseDiem = new RelayCommand<object>(p => true, p => CloseNhapDiem(p));
             #endregion
         }
+
+
         // Danh sách tạm //
         private IEnumerable<PhongThi> GetViewModels()
         {
@@ -380,10 +414,26 @@ namespace QL_TTTA.ViewModel
             throw new NotImplementedException();
         }
 
-        
+        //Các chức năng ở tại PhongThiView_ChiTiet_NhapDiem
+        #region
+
+        private void CloseNhapDiem(object p)
+        {
+            PhongThiView_ChiTiet_NhapDiem x = p as PhongThiView_ChiTiet_NhapDiem;
+            x.Close();
+        }
+
+        private void NhapDiem()
+        {
+            PhongThiView_ChiTiet_NhapDiem x = new PhongThiView_ChiTiet_NhapDiem();
+            x.DataContext = this;
+            x.ShowDialog();
+        }
+        #endregion
+
         #endregion
 
         #endregion
     }
-    
+
 }

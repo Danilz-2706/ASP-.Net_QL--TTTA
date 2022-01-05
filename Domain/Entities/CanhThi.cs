@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class CanhThi
     {
         public GiaoVien GiaoVien { get; set; }
-        public string MaGV { get; set; }
+        public int MaGV { get; set; }
         public PhongThi PhongThi { get; set; }
         public string MaPhongThi { get; set; }
     }

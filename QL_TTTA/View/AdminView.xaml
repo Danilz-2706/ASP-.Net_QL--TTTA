@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QL_TTTA.View"
              xmlns:admanager="clr-namespace:QL_TTTA.View.AdminManagerView"
+             xmlns:local="clr-namespace:QL_TTTA.View"
              mc:Ignorable="d">
     <UserControl.Style >
         <!--Style UserControl-->
@@ -23,14 +23,15 @@
             </Style.Triggers>
         </Style>
     </UserControl.Style>
+    <!--DataContext="{Binding Source={StaticResource ServiceLocator}, Path=PhongThiViewModel }-->
     <Grid Background="#fff">
         <TabControl>
-            <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{Binding Path=PhongThiViewModel,Source={StaticResource ServiceLocator} }">
+            <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=PhongThiViewModel}">
                 <Grid>
                     <admanager:PhongThiView/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Khóa thi" Style="{StaticResource TabItem}">
+            <!--<TabItem Header="Khóa thi" Style="{StaticResource TabItem}">
                 <Grid>
                     <admanager:KhoaThiView></admanager:KhoaThiView>
 
@@ -47,12 +48,12 @@
                     <admanager:TrinhDoView></admanager:TrinhDoView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{Binding Path=ThiSinhViewModel,Source={StaticResource ServiceLocator} }">
+            <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=ThiSinhViewModel }">
                 <Grid>
                     <admanager:ThiSinhView></admanager:ThiSinhView>
 
                 </Grid>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </Grid>
 </UserControl>

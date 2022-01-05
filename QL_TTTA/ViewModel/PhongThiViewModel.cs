@@ -1,5 +1,5 @@
-﻿using Domain.Interfaces;
-using QL_TTTA.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using QL_TTTA.View.AdminManagerView;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace QL_TTTA.ViewModel
         //----------------- Biến tham chiếu - biding của từng View -----------------//
         // Các biến ở PhongThiView //
         #region
-        public int MaPhong { get; set; }
+        public string MaPhong { get; set; }
         public int SoLuong { get; set; }
         public string TenPhong { get; set; }
         public DateTime? NgayThi { get; set; }
@@ -37,12 +37,12 @@ namespace QL_TTTA.ViewModel
                 _SelectedItem = value;
                 if (SelectedItem != null)
                 {
-                    MaPhong = SelectedItem.MaPhong;
-                    SoLuong = SelectedItem.SoLuong;
+                    MaPhong = SelectedItem.MaPhongThi;
+                    SoLuong = SelectedItem.ThamGiaDuThis.Count();
                     TenPhong = SelectedItem.TenPhong;
-                    NgayThi = SelectedItem.NgayThi;
-                    TenTrinhDo = SelectedItem.TenTrinhDo;
-                    KhoaThi = SelectedItem.KhoaThi;
+                    NgayThi = SelectedItem.ThoiGianBatDau;
+                    TenTrinhDo = SelectedItem.TrinhDo.TenTrinhDo;
+                    KhoaThi = SelectedItem.KhoaThi.TenKhoaThi;
 
                     //SelectedPhanBoGiaoVien = new ObservableCollection<GiaoVien>(doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList());
                 }
@@ -64,11 +64,11 @@ namespace QL_TTTA.ViewModel
 
         // Các biến ở PhongThiView_ChiTiet //
         #region
-        public ObservableCollection<ThiSinh> SelectedPhanBoThiSinh { get; set; }
+        public ObservableCollection<ThamGiaDuThi> SelectedPhanBoThiSinh { get; set; }
         public TrinhDo SelectedTrinhDo;
         public KhoaThi SelectedKhoaThi;
-        private ThiSinh _SelectedTS;
-        public ThiSinh SelectedTS
+        private ThamGiaDuThi _SelectedTS;
+        public ThamGiaDuThi SelectedTS
         {
             get => _SelectedTS;
             set
@@ -76,15 +76,15 @@ namespace QL_TTTA.ViewModel
                 _SelectedTS = value;
                 if(_SelectedTS != null)
                 {
-                    DiemNghe = _SelectedTS.DiemNghe;
-                    DiemNoi = _SelectedTS.DiemNoi;
-                    DiemDoc = _SelectedTS.DiemDoc;
-                    DiemViet = _SelectedTS.DiemViet;
+                    DiemNghe = _SelectedTS.Nghe;
+                    DiemNoi = _SelectedTS.Noi;
+                    DiemDoc = _SelectedTS.Doc;
+                    DiemViet = _SelectedTS.Viet;
                 }
             }
         }
         public GiaoVien SelectedGV;
-        public float DiemDoc, DiemViet,DiemNghe, DiemNoi;
+        public int? DiemDoc, DiemViet,DiemNghe, DiemNoi;
 
         #endregion
 
@@ -104,7 +104,7 @@ namespace QL_TTTA.ViewModel
                 if (_SelectedItemGiaoVien != null)
                 {
                     MaGiaoVien = _SelectedItemGiaoVien.MaGV;
-                    TenGiaoVien = _SelectedItemGiaoVien.TenGiaoVien;
+                    TenGiaoVien = _SelectedItemGiaoVien.HoTen;
                     SDT = _SelectedItemGiaoVien.SDT;
                 }
             }
@@ -114,8 +114,8 @@ namespace QL_TTTA.ViewModel
 
         // Các biến ở PhongThiView_ChiTiet_NhapDiem //
         #region
-        private ThiSinh _SelectedTSDiem;
-        public ThiSinh SelectedTSDiem
+        private ThamGiaDuThi _SelectedTSDiem;
+        public ThamGiaDuThi SelectedTSDiem
         {
             get => _SelectedTSDiem;
             set
@@ -123,10 +123,10 @@ namespace QL_TTTA.ViewModel
                 _SelectedTS = value;
                 if (_SelectedTS != null)
                 {
-                    DiemNghe = _SelectedTSDiem.DiemNghe;
-                    DiemNoi = _SelectedTSDiem.DiemNoi;
-                    DiemDoc = _SelectedTSDiem.DiemDoc;
-                    DiemViet = _SelectedTSDiem.DiemViet;
+                    DiemNghe = _SelectedTSDiem.Nghe;
+                    DiemNoi = _SelectedTSDiem.Noi;
+                    DiemDoc = _SelectedTSDiem.Doc;
+                    DiemViet = _SelectedTSDiem.Viet;
                 }
             }
         }
@@ -217,8 +217,8 @@ namespace QL_TTTA.ViewModel
         public PhongThiViewModel(IPhongThiRepository phongThiRepository)
         {
             this.phongThiRepository = phongThiRepository;
-            _listPhongThi = new ObservableCollection<PhongThi>();
-            foreach (var i in GetViewModels()) { _listPhongThi.Add(i); }
+            _listPhongThi = new ObservableCollection<PhongThi>(phongThiRepository.GetAll().ToList());
+            //_listPhongThi = new ObservableCollection<PhongThi>(phongThiRepository.GetAll());
             ListPhongThi = CollectionViewSource.GetDefaultView(_listPhongThi);
             ListPhongThi.Filter = Filter;
 
@@ -244,34 +244,6 @@ namespace QL_TTTA.ViewModel
             PhongNhapDiemNhieuTS = new RelayCommand<object>(p => true, p => NhapDiem());
             CloseDiem = new RelayCommand<object>(p => true, p => CloseNhapDiem(p));
             #endregion
-        }
-
-
-        // Danh sách tạm //
-
-        private IEnumerable<PhongThi> GetViewModels()
-        {
-            yield return new PhongThi(1, "Doctor");
-            yield return new PhongThi(2, "Web Developer");
-            yield return new PhongThi(3, "Web Developer");
-            yield return new PhongThi(4, "Construction Worker");
-            yield return new PhongThi(5, "Cashier");
-            yield return new PhongThi(6, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(7, "Doctor");
-            yield return new PhongThi(8, "Guitar Player");
         }
 
         //Func Thêm Phòng Thi
@@ -337,7 +309,7 @@ namespace QL_TTTA.ViewModel
         #region
         private void XoaTS()
         {
-            PhongXoaTS = new RelayCommand<object>(p => { return SelectedTS != null && SelectedTS.DiemDoc ==0 && SelectedTS.DiemNghe == 0 && SelectedTS.DiemNoi == 0 && SelectedTS.DiemViet == 0; },
+            PhongXoaTS = new RelayCommand<object>(p => { return SelectedTS != null && SelectedTS.Nghe ==0 && SelectedTS.Noi == 0 && SelectedTS.Doc == 0 && SelectedTS.Viet == 0; },
                 p => { });
         }
 
@@ -349,18 +321,18 @@ namespace QL_TTTA.ViewModel
 
         private void CapNhapDiem()
         {
-            Update_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.DiemNghe || DiemNoi != SelectedTS.DiemNoi || DiemDoc != SelectedTS.DiemDoc || DiemViet != SelectedTS.DiemViet); },
+            Update_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.Nghe || DiemNoi != SelectedTS.Noi || DiemDoc != SelectedTS.Doc || DiemViet != SelectedTS.Viet); },
                 p => {});
-            Undo_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.DiemNghe || DiemNoi != SelectedTS.DiemNoi || DiemDoc != SelectedTS.DiemDoc || DiemViet != SelectedTS.DiemViet); },
+            Undo_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.Nghe || DiemNoi != SelectedTS.Noi || DiemDoc != SelectedTS.Doc || DiemViet != SelectedTS.Viet); },
                 p => { });
 
         }
 
         private void CapNhapThongTinPhong()
         {
-            Undo = new RelayCommand<object>(p => { return SelectedItem != null && (TenPhong != SelectedItem.TenPhong || SoLuong != SelectedItem.SoLuong); },
+            Undo = new RelayCommand<object>(p => { return SelectedItem != null && (TenPhong != SelectedItem.TenPhong ); },
                 p => { });
-            Agree = new RelayCommand<object>(p => { return SelectedItem != null && (TenPhong != SelectedItem.TenPhong || SoLuong != SelectedItem.SoLuong); },
+            Agree = new RelayCommand<object>(p => { return SelectedItem != null && (TenPhong != SelectedItem.TenPhong); },
                 p => { });
         }
         #endregion

@@ -9,8 +9,9 @@ namespace Infrastructure.Persistence
     {
         public CenterContext CreateDbContext(string[] args)
         {
+            var connectionString = @"Server=.\SQLEXPRESS;Database=EnglishCenterDB;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<CenterContext>();
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=EnglishCenterDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(connectionString);
 
             return new CenterContext(optionsBuilder.Options);
         }

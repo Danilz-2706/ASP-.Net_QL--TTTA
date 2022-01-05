@@ -25,7 +25,7 @@
     </UserControl.Style>
     <Grid Background="#fff">
         <TabControl>
-            <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{StaticResource ptvm}">
+            <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{Binding Path=PhongThiViewModel,Source={StaticResource ServiceLocator} }">
                 <Grid>
                     <admanager:PhongThiView/>
                 </Grid>
@@ -47,7 +47,7 @@
                     <admanager:TrinhDoView></admanager:TrinhDoView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{StaticResource tsvm}">
+            <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{Binding Path=ThiSinhViewModel,Source={StaticResource ServiceLocator} }">
                 <Grid>
                     <admanager:ThiSinhView></admanager:ThiSinhView>
 

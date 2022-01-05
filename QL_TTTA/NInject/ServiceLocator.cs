@@ -29,5 +29,23 @@ namespace QL_TTTA.NInject
                 return Kernel.Get<ThiSinhViewModel>();
             }
         }
+
+        //Khóa thi//
+        public KhoaThiViewModel KhoaThiViewModel
+        {
+            get
+            {
+                return Kernel.Get<KhoaThiViewModel>();
+            }
+        }
+
+        //Đăng ký//
+        public RegisterViewModel RegisterViewModel
+        {
+            get
+            {
+                return Kernel.Get<RegisterViewModel>();
+            }
+        }
     }
 }

@@ -92,11 +92,13 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Phòng" DisplayMemberBinding="{Binding MaPhong}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Phòng" DisplayMemberBinding="{Binding TenPhong}"></GridViewColumn>
+                                    <GridViewColumn Header="Trình độ" DisplayMemberBinding="{Binding MaTrinhDo}"></GridViewColumn>
+                                    <GridViewColumn Header="Khóa thi" DisplayMemberBinding="{Binding MaKhoaThi}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày thi" DisplayMemberBinding="{Binding ThoiGianBatDau,StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Giờ bắt đầu" DisplayMemberBinding="{Binding ThoiGianBatDau,StringFormat='HH:mm'}"></GridViewColumn>
+                                    <GridViewColumn Header="Giờ kết thúc" DisplayMemberBinding="{Binding ThoiGianKetThuc,StringFormat='HH:mm'}"></GridViewColumn>
                                     <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                                    <GridViewColumn Header="Trình độ" DisplayMemberBinding="{Binding TenTrinhDo}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày thi" DisplayMemberBinding="{Binding NgayThi,StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

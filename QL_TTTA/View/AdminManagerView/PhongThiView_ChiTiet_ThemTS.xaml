@@ -13,5 +13,168 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-    
+    <Grid Background="#ffefe6" Width="800" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
+        </Grid.Effect>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--//header//-->
+        <Grid 
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource bgheader}">
+
+            <TextBlock Text="T H Ê M - T H Í - S I N H - V À O - P H Ò N G"
+                       Margin="0"
+                       Style="{StaticResource HeaderStyleViewChild}"/>
+
+            <Button 
+                            Height="24"
+                            Width="24"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,20,0"
+                            Style="{StaticResource CloseBtn_Style}"
+                            Command="{Binding Close_PhongThemTS}"
+                            CommandParameter="{Binding ElementName=PhongThiViewChiTiet_ThemTS}"/>
+        </Grid>
+
+        <!--//Footer//-->
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource bgfooter}">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button
+                            BorderBrush="#C4C4C4"
+                            Background="#C4C4C4"
+                            Foreground="#000"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="100"
+                            Margin="0 0 20 0"
+                            Command="{Binding AddTSn}"
+                            CommandParameter="{Binding ElementName=PhongThiViewChiTiet_ThemTS}"
+                            ToolTip="Thêm tiếp">
+                    <TextBlock Text="Thêm tiếp"/>
+                </Button>
+
+                <Button
+                            Background="#C4C4C4"
+                            Foreground="#000"
+                            BorderBrush="#C4C4C4"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="100"
+                            Command="{Binding AddTS, UpdateSourceTrigger=PropertyChanged}"
+                            CommandParameter="{Binding ElementName=PhongThiViewChiTiet_ThemTS}"
+                            ToolTip="Thêm 1 lần">
+                    <TextBlock Text="Thêm 1 lần"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!--//Container//-->
+        <Grid Grid.Row="1">
+            <Grid>
+                <!--//Layout//-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="8*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--//Search//-->
+                <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource bgheader}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock      Grid.Column="0"
+                                    Text="Tìm kiếm"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="0 0 4 0"
+                                    Foreground="#eff0f3"
+                                    Style="{StaticResource fontsizeTextBlock}"></TextBlock>
+                    <Grid Grid.Column="1" Background="#fff" Height="30" HorizontalAlignment="Stretch">
+                        <TextBox
+                                    materialDesign:HintAssist.Hint="Search"
+                                    VerticalContentAlignment="Center"
+                                    IsEnabled="True"
+                                    Margin="4 0 4 0"
+                                    HorizontalContentAlignment="Stretch"
+                                    HorizontalAlignment="Stretch" AcceptsReturn="True"
+                                    VerticalAlignment="Center"
+                                    materialDesign:HintAssist.HintOpacity=".26"
+                            >
+
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Column="2" Background="#FF38CCD6" Height="30"
+                              HorizontalAlignment="Left">
+                        <Image  Source="/Assets/Icon/DT1__UI--icon/search.png"
+                                    Width="30" Height="30"/>
+                    </Grid>
+                </Grid>
+
+
+                <!--//Filter//-->
+                <Grid Grid.Row="0" Grid.Column="1" Style="{StaticResource bgheader}">
+
+                </Grid>
+
+                <!--//List Thí Sinh//-->
+                <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
+                    <ListView ItemsSource="{Binding ListTS}" SelectedItem="{Binding SelectedItemTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+
+                                <GridView.Columns>
+                                    <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
+                                    <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <!--//Info//-->
+                    <Grid>
+                        <StackPanel  VerticalAlignment="Stretch" Style="{StaticResource bgMainContent}">
+                            <Grid Margin="0 8 0 16">
+                                <TextBlock  Text="CMND"  Style="{StaticResource textblockName}"/>
+                                <TextBox Style="{StaticResource textboxInfo}" IsEnabled="False" 
+                                         Text="{Binding CMNDTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            </Grid>
+
+                            <Grid Margin="0 16 0 8">
+                                <TextBlock  Text="Tên TS"  Style="{StaticResource textblockName}"/>
+
+                                <TextBox Style="{StaticResource textboxInfo}"
+                                             IsEnabled ="False"
+                                             Text="{Binding HoTenTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            </Grid>
+
+                            <Grid Margin="0 16 0 8">
+                                <TextBlock  Text="SĐT"  Style="{StaticResource textblockName}"/>
+
+                                <TextBox Style="{StaticResource textboxInfo}"
+                                             IsEnabled ="False"
+                                             Text="{Binding SDTTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+
 </Window>

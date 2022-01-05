@@ -87,8 +87,8 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding MaTS}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding TenTS}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                                     <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                                     <!--<GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh,StringFormat='dd/MM/yyyy'}"></GridViewColumn>

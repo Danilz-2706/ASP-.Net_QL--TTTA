@@ -46,7 +46,7 @@
                             VerticalAlignment="Center"
                             Margin="0,0,20,0"
                             Style="{StaticResource CloseBtn_Style}"
-                            Command="{Binding Close_PhongThem}"
+                            Command="{Binding Close_KhoaThiThem}"
                             CommandParameter="{Binding ElementName=KhoaThiViewThem}"/>
         </Grid>
         <!--//Footer//-->
@@ -115,7 +115,7 @@
                         <DatePicker Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Margin="40 0 5 0" 
-                                    IsEnabled="False"
+                                    IsEnabled="True"
                                     SelectedDate="{Binding AddNgayThi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                     materialDesign:HintAssist.Hint="Ngày thi"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 

@@ -23,7 +23,6 @@
             </Style.Triggers>
         </Style>
     </UserControl.Style>
-    <!--DataContext="{Binding Source={StaticResource ServiceLocator}, Path=PhongThiViewModel }-->
     <Grid Background="#fff">
         <TabControl>
             <TabItem Header="Phòng thi" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=PhongThiViewModel}">
@@ -31,7 +30,7 @@
                     <admanager:PhongThiView/>
                 </Grid>
             </TabItem>
-            <!--<TabItem Header="Khóa thi" Style="{StaticResource TabItem}">
+            <TabItem Header="Khóa thi" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=KhoaThiViewModel}">
                 <Grid>
                     <admanager:KhoaThiView></admanager:KhoaThiView>
 
@@ -53,7 +52,7 @@
                     <admanager:ThiSinhView></admanager:ThiSinhView>
 
                 </Grid>
-            </TabItem>-->
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

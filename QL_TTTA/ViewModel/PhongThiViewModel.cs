@@ -152,9 +152,9 @@ namespace QL_TTTA.ViewModel
         public string HoTenTS { get; set; }
         public string SDTTS { get; set; }
 
-        public ObservableCollection<ThiSinh> ListTS { get; set; }
-        private ThiSinh _SelectedItemTS;
-        public ThiSinh SelectedItemTS
+        public ObservableCollection<SoBaoDanh> ListTS { get; set; }
+        private SoBaoDanh _SelectedItemTS;
+        public SoBaoDanh SelectedItemTS
         {
             get => _SelectedItemTS;
             set
@@ -163,8 +163,8 @@ namespace QL_TTTA.ViewModel
                 if (_SelectedItemTS != null)
                 {
                     CMNDTS = _SelectedItemTS.CMND;
-                    HoTenTS = _SelectedItemTS.HoTen;
-                    SDTTS = _SelectedItemTS.SDT;
+                    //HoTenTS = _SelectedItemTS.HoTen;
+                    //SDTTS = _SelectedItemTS.SDT;
                 }
             }
         }
@@ -356,6 +356,7 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_ChiTiet x = new PhongThiView_ChiTiet();
             x.DataContext = this;
+            SelectedPhanBoThiSinh = SelectedItem.ThamGiaDuThis;
             x.ShowDialog();
         }
         private void CloseChiTiet(object obj)
@@ -446,7 +447,7 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_ChiTiet_ThemTS x = new PhongThiView_ChiTiet_ThemTS();
             x.DataContext = this;
-            ListTS = new ObservableCollection<ThiSinh>(thiSinhRepository.GetAll());
+            ListTS = new ObservableCollection<SoBaoDanh>(soBaoDanhRepository.GetAll());
             x.ShowDialog();
         }
         private void ClosePhongThemTS(object p)
@@ -462,29 +463,11 @@ namespace QL_TTTA.ViewModel
                 return false;
             }, p =>
             {
-                var y = trinhDoRepository.GetBy(SelectedItem.MaTrinhDo).SBDs;
-
-                string x = SelectedItem.MaTrinhDo + $"{y.Count}";
-
-                var sbdn = new SoBaoDanh() { CMND = SelectedItemTS.CMND, MaKhoaThi = SelectedItem.MaKhoaThi, MaTrinhDo = SelectedItem.MaTrinhDo, SBD = x };
-                MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên: ");
-
-                //soBaoDanhRepository.Add(sbdn);
-                //try
-                //{
-                //    var tsn = new ThamGiaDuThi() { MaPhongThi = SelectedItem.MaPhongThi, SBD = };
-                //    if (phanBoNhanVienDoanService.Create(pbnv))
-                //    {
-                //        pbnv.NhanVien = SelectedItemNhanVien;
-                //        CloseThemNV(p);
-                //        MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên: {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-                //        //Show();
-                //    }
-                //}
-                //catch
-                //{
-                //    MessageBox.Show("Lỗi ở thêm NHÂN VIÊN - Đoàn Du Lịch");
-                //}
+                
+                var tgdt = new ThamGiaDuThi() { MaPhongThi = SelectedItem.MaPhongThi, SBD =SelectedItemTS.SBD };
+                thamGiaDuThiRepository.Add(tgdt);
+                ClosePhongThemTS(p);
+                
 
             });
             //AddTSn = new RelayCommand<PhongThiView_ChiTiet_ThemTS>(p =>

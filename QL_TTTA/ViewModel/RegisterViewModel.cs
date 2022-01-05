@@ -35,7 +35,6 @@ namespace QL_TTTA.ViewModel
         public TrinhDo SelectedTD { get; set; }
         public KhoaThi SelectedKT { get; set; }
 
-        public ICollection<ThamGiaDuThi> Danhsach { get; set; }
         private ThiSinh _SelectedTS;
         public ThiSinh SelectedTS
         {
@@ -103,6 +102,13 @@ namespace QL_TTTA.ViewModel
                     thiSinhRepository.Add(tsm);
                     MessageBox.Show($"Đã tạo thành công thí sinh: CMND {AddCMND} - Họ tên {AddTenTS}");
                 }
+
+                var y = soBaoDanhRepository.GetAll().Where(x => x.MaTrinhDo.StartsWith($"{SelectedTD.MaTrinhDo}")).Count() + 1;
+                string x = SelectedTD.MaTrinhDo + y.ToString();
+
+                var sbdn = new SoBaoDanh() { CMND = AddCMND, MaKhoaThi = SelectedKT.MaKhoaThi, MaTrinhDo = SelectedTD.MaTrinhDo, SBD = x };
+                soBaoDanhRepository.Add(sbdn);
+
                 SelectedTS = null;
                 AddCMND = null;
                 AddTenTS = null;

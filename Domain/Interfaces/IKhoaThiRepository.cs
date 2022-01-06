@@ -7,6 +7,6 @@ namespace Domain.Interfaces
 {
     public interface IKhoaThiRepository : IEFRepository<KhoaThi>
     {
-        
+        public int CountTSByKhoa(string khoaThi,string trinhDo);
     }
 }

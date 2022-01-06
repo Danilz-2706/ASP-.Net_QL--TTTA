@@ -10,5 +10,16 @@ namespace Infrastructure.Persistence.Service
         public KhoaThiRepository(CenterContext context) : base(context)
         {
         }
+
+        public int CountTSByKhoa(string khoaThi,string trinhDo)
+        {
+            var count = (from p in context.PhongThis
+                       where p.MaKhoaThi.Equals(khoaThi) && p.MaTrinhDo.StartsWith(trinhDo)
+                         from tg in context.ThamGiaDuThis
+                       where tg.MaPhongThi.Equals(p.MaPhongThi)
+                       select tg.MaPhongThi
+                       ).Count();
+            return count;
+        }
     }
 }

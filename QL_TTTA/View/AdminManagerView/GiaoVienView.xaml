@@ -37,6 +37,7 @@
                                     Style="{StaticResource fontsizeTextBlock}"></TextBlock>
                     <Grid Grid.Column="1" Background="#fff" Height="30" HorizontalAlignment="Stretch">
                         <TextBox
+                                    Text="{Binding ListFilter, UpdateSourceTrigger=PropertyChanged}"
                                     materialDesign:HintAssist.Hint="Search"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"
@@ -81,13 +82,18 @@
                 <!--//List Giáo Viên//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView  ItemsSource="{Binding ListGiaoVien}" SelectedItem="{Binding SelectedItem}">
+                    <ListView  ItemsSource="{Binding ListGV}" 
+                               SelectedItem="{Binding SelectedItem}"
+                               ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Giáo Viên" DisplayMemberBinding="{Binding MaGV}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding TenGV}"></GridViewColumn>
-                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding NgaySinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
+                                    <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -119,9 +125,30 @@
                                     <TextBox
                                                 IsEnabled="False"
                                                 Style="{StaticResource textboxInfo}"
-                                                Text="{Binding TenGV,UpdateSourceTrigger=PropertyChanged}"/>
+                                                Text="{Binding HoTen,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
+                                <Grid Margin="0 5 0 8">
+                                    <TextBlock  Text="Giới Tính"  Style="{StaticResource textblockName}"/>
+                                    <TextBox
+                                                IsEnabled="False"
+                                                Style="{StaticResource textboxInfo}"
+                                                Text="{Binding GioiTinh,UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                                <Grid Margin="0 5 0 8">
+                                    <TextBlock  Text="Ngày Sinh"  Style="{StaticResource textblockName}"/>
+                                    <TextBox
+                                                IsEnabled="False"
+                                                Style="{StaticResource textboxInfo}"
+                                                Text="{Binding NgaySinh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                                <Grid Margin="0 5 0 8">
+                                    <TextBlock  Text="Email"  Style="{StaticResource textblockName}"/>
+                                    <TextBox
+                                                IsEnabled="False"
+                                                Style="{StaticResource textboxInfo}"
+                                                Text="{Binding Email,UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="SĐT"  Style="{StaticResource textblockName}"/>
                                     <TextBox

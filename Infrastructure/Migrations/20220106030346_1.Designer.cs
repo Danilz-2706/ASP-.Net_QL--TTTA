@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CenterContext))]
-    [Migration("20220105023052_1")]
+    [Migration("20220106030346_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,26 +239,26 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.TrinhDo", b =>
                 {
-                    b.Property<string>("TenTrinhDo")
+                    b.Property<string>("MaTrinhDo")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MaTrinhDo")
+                    b.Property<string>("TenTrinhDo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TenTrinhDo");
+                    b.HasKey("MaTrinhDo");
 
                     b.ToTable("TrinhDo");
 
                     b.HasData(
                         new
                         {
-                            TenTrinhDo = "A2",
-                            MaTrinhDo = "A2"
+                            MaTrinhDo = "A2",
+                            TenTrinhDo = "A2"
                         },
                         new
                         {
-                            TenTrinhDo = "B1",
-                            MaTrinhDo = "B1"
+                            MaTrinhDo = "B1",
+                            TenTrinhDo = "B1"
                         });
                 });
 

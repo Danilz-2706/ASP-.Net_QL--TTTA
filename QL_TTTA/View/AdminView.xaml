@@ -36,17 +36,17 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Giáo viên" Style="{StaticResource TabItem}">
+            <TabItem Header="Giáo viên" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=GiaoVienViewModel}">
                 <Grid>
                     <admanager:GiaoVienView></admanager:GiaoVienView>
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Trình độ" Style="{StaticResource TabItem}">
+            <!--<TabItem Header="Trình độ" Style="{StaticResource TabItem}">
                 <Grid>
                     <admanager:TrinhDoView></admanager:TrinhDoView>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Thí sinh" Style="{StaticResource TabItem}" DataContext="{Binding Source={StaticResource ServiceLocator}, Path=ThiSinhViewModel }">
                 <Grid>
                     <admanager:ThiSinhView></admanager:ThiSinhView>

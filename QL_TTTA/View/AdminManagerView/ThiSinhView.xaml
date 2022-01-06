@@ -82,19 +82,18 @@
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
                     <ListView ItemsSource="{Binding ListTS}"
+                              SelectedItem="{Binding SelectedItem}"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              SelectedItem="{Binding SelectedItem}">
+                              >
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
-                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
-                                    <!--<GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh,StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
-                                    <GridViewColumn Header="CCCD" DisplayMemberBinding="{Binding CCCD}"></GridViewColumn>-->
+                                    <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
+                                    <GridViewColumn Header="HoTen" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -158,9 +157,8 @@
                                     <TextBox
                                                 IsEnabled="False"
                                                 Style="{StaticResource textboxInfo}"
-                                                Text="{Binding CCCD,UpdateSourceTrigger=PropertyChanged}"/>
+                                                Text="{Binding CMND,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
-
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>

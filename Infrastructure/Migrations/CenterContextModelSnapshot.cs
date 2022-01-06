@@ -237,26 +237,26 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.TrinhDo", b =>
                 {
-                    b.Property<string>("TenTrinhDo")
+                    b.Property<string>("MaTrinhDo")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MaTrinhDo")
+                    b.Property<string>("TenTrinhDo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TenTrinhDo");
+                    b.HasKey("MaTrinhDo");
 
                     b.ToTable("TrinhDo");
 
                     b.HasData(
                         new
                         {
-                            TenTrinhDo = "A2",
-                            MaTrinhDo = "A2"
+                            MaTrinhDo = "A2",
+                            TenTrinhDo = "A2"
                         },
                         new
                         {
-                            TenTrinhDo = "B1",
-                            MaTrinhDo = "B1"
+                            MaTrinhDo = "B1",
+                            TenTrinhDo = "B1"
                         });
                 });
 

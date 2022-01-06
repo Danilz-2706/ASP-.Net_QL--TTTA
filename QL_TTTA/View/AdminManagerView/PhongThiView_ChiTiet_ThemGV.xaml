@@ -53,6 +53,7 @@
                             Foreground="#000"
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Width="100"
+                    IsEnabled="False"
                             Margin="0 0 20 0"
                             Command="{Binding AddGVn}"
                             CommandParameter="{Binding ElementName=PhongThiViewChiTiet_ThemGV}"
@@ -103,6 +104,7 @@
                                     Style="{StaticResource fontsizeTextBlock}"></TextBlock>
                     <Grid Grid.Column="1" Background="#fff" Height="30" HorizontalAlignment="Stretch">
                         <TextBox
+                                    Text="{Binding ListFilterGV, UpdateSourceTrigger=PropertyChanged}"
                                     materialDesign:HintAssist.Hint="Search"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"
@@ -130,13 +132,14 @@
 
                 <!--//List Giáo Viên//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding ListGiaovien}" SelectedItem="{Binding SelectedItemGiaoVien, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding ListGV}" 
+                              SelectedItem="{Binding SelectedItemGiaoVien}"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.View>
                             <GridView>
-
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Giáo Viên" DisplayMemberBinding="{Binding MaGV}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding TenGV}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                                     <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
@@ -151,7 +154,7 @@
                             <Grid Margin="0 8 0 16">
                                 <TextBlock  Text="Mã GV"  Style="{StaticResource textblockName}"/>
                                 <TextBox Style="{StaticResource textboxInfo}" IsEnabled="False" 
-                                         Text="{Binding MaGiaoVien, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                         Text="{Binding MaGV, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </Grid>
 
                             <Grid Margin="0 16 0 8">
@@ -159,7 +162,7 @@
 
                                 <TextBox Style="{StaticResource textboxInfo}"
                                              IsEnabled ="False"
-                                             Text="{Binding TenGiaoVien, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                             Text="{Binding HoTenGV, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </Grid>
 
                             <Grid Margin="0 16 0 8">
@@ -167,7 +170,7 @@
 
                                 <TextBox Style="{StaticResource textboxInfo}"
                                              IsEnabled ="False"
-                                             Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                                             Text="{Binding SDTGV, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>

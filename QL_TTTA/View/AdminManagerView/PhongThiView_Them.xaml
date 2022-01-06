@@ -147,26 +147,6 @@
                                     materialDesign:HintAssist.Hint="Thời gian kết thúc" />
                     </Grid>
 
-                    <!--Số Lượng-->
-                    <Grid Margin="0 8 0 8">
-                        <TextBlock  Text="Số Lượng"  Style="{StaticResource textblockNameChild}"/>
-                        <Border Margin="0 0 10 0"
-                                Width="160" 
-                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
-                                HorizontalAlignment="Right">
-                            <TextBox
-                                Text="{Binding AddSoLuong,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="True"
-                                VerticalAlignment="Top"
-                                MaxHeight="60"
-                                FontSize="12"
-                                Margin="10 0 0 0"
-                                AcceptsReturn="True"
-                                TextWrapping="Wrap"
-                                VerticalScrollBarVisibility="Auto"
-                                materialDesign:HintAssist.Hint="Nhập số lượng"/>
-                        </Border>
-                    </Grid>
 
                 </StackPanel>
             </ScrollViewer>

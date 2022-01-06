@@ -30,6 +30,15 @@ namespace QL_TTTA.NInject
             }
         }
 
+        //Giáo viên//
+        public GiaoVienViewModel GiaoVienViewModel
+        {
+            get
+            {
+                return Kernel.Get<GiaoVienViewModel>();
+            }
+        }
+
         //Khóa thi//
         public KhoaThiViewModel KhoaThiViewModel
         {

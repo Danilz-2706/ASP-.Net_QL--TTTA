@@ -60,12 +60,12 @@ namespace Infrastructure.Migrations
                 name: "TrinhDo",
                 columns: table => new
                 {
-                    TenTrinhDo = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MaTrinhDo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MaTrinhDo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TenTrinhDo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TrinhDo", x => x.TenTrinhDo);
+                    table.PrimaryKey("PK_TrinhDo", x => x.MaTrinhDo);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,7 +92,7 @@ namespace Infrastructure.Migrations
                         name: "FK_PhongThi_TrinhDo_MaTrinhDo",
                         column: x => x.MaTrinhDo,
                         principalTable: "TrinhDo",
-                        principalColumn: "TenTrinhDo",
+                        principalColumn: "MaTrinhDo",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -124,7 +124,7 @@ namespace Infrastructure.Migrations
                         name: "FK_SoBaoDanh_TrinhDo_MaTrinhDo",
                         column: x => x.MaTrinhDo,
                         principalTable: "TrinhDo",
-                        principalColumn: "TenTrinhDo",
+                        principalColumn: "MaTrinhDo",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -201,7 +201,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "TrinhDo",
-                columns: new[] { "TenTrinhDo", "MaTrinhDo" },
+                columns: new[] { "MaTrinhDo", "TenTrinhDo" },
                 values: new object[,]
                 {
                     { "A2", "A2" },

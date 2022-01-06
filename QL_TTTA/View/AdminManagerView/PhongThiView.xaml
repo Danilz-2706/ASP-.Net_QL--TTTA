@@ -182,7 +182,7 @@
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Header="Mã Giáo Viên" DisplayMemberBinding="{Binding MaGV,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding TenGiaoVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Tên Giáo Viên" DisplayMemberBinding="{Binding HoTen,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                     <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                 </GridView>
                                             </ListView.View>

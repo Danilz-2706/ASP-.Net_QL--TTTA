@@ -84,16 +84,23 @@
                 <StackPanel Margin="0 4 0 0">
                     <!--Trình độ-->
                     <Grid Margin="0 8 0 8">
-                        <TextBlock  Text="Trình Độ"  Style="{StaticResource textblockNameDetail}"/>
-                        <ComboBox
-                                ItemsSource="{Binding ListTrinhDo}"
-                                DisplayMemberPath="TenTrinhDo"
-                                SelectedValue="{Binding SelectedTrinhDo ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                IsEditable="False"
+                        <TextBlock  Text="Trình độ"  Style="{StaticResource textblockNameDetail}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding TenTrinhDo,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 IsEnabled="False"
-                                Style="{StaticResource comboboxChild}"
-                                materialDesign:HintAssist.HintOpacity=".26">
-                        </ComboBox>
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập trình độ"/>
+                        </Border>
                     </Grid>
 
                     <!--Tên Phòng-->
@@ -105,7 +112,7 @@
                                 HorizontalAlignment="Right">
                             <TextBox
                                 Text="{Binding TenPhong,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                IsEnabled="True"
+                                IsEnabled="False"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
                                 FontSize="12"
@@ -120,15 +127,22 @@
                     <!--Khóa Thi-->
                     <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Khóa Thi"  Style="{StaticResource textblockNameDetail}"/>
-                        <ComboBox
-                                ItemsSource="{Binding ListKhoaThi}"
-                                DisplayMemberPath="TenKhoa"
-                                SelectedValue="{Binding SelectedKhoaThi ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                IsEditable="False"
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding KhoaThi,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 IsEnabled="False"
-                                Style="{StaticResource comboboxChild}"
-                                materialDesign:HintAssist.HintOpacity=".26">
-                        </ComboBox>
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập khóa thi"/>
+                        </Border>
                     </Grid>
 
                     <!--Ngày Thi-->
@@ -144,7 +158,7 @@
                                     VerticalAlignment="Center"
                                     Margin="30 0 5 0" 
                                     IsEnabled="False"
-                                    SelectedDate="{Binding SelectedKhoaThi.NgayThi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    SelectedDate="{Binding NgayThi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                     materialDesign:HintAssist.Hint="Ngày thi"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
                                     IsTodayHighlighted="False" />
@@ -159,8 +173,8 @@
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
-                                Text="{Binding SoLuong, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="True"
+                                Text="{Binding SoLuong,UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="False"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
                                 FontSize="12"
@@ -219,6 +233,7 @@
                         Grid.Column="3"
                                 Background="#C4C4C4"
                                 Foreground="#000"
+                                IsEnabled="False"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
                                 Command="{Binding PhongXoaTS, UpdateSourceTrigger=PropertyChanged}"
@@ -241,7 +256,7 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
-                                <GridViewColumn Width="90" Header="SBD" DisplayMemberBinding="{Binding SBD}"></GridViewColumn>
+                                <GridViewColumn Width="90" Header="SBD" DisplayMemberBinding="{Binding SoBaoDanh}"></GridViewColumn>
                                 <GridViewColumn Width="150" Header="Họ tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                                 <GridViewColumn Width="80" Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
                                 <GridViewColumn Width="120" Header="Ngày sinh" DisplayMemberBinding="{Binding NgaySinh, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
@@ -302,7 +317,9 @@
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView ItemsSource="{Binding SelectedPhanBoGiaoVien, UpdateSourceTrigger=PropertyChanged}" MaxHeight="140" SelectedItem="{Binding SelectedGV, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView ItemsSource="{Binding SelectedPhanBoGiaoVien, UpdateSourceTrigger=PropertyChanged}" 
+                              MaxHeight="140" 
+                              SelectedItem="{Binding SelectedGV, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>
@@ -313,8 +330,8 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
-                                    <GridViewColumn Width="148" Header="Mã GV" DisplayMemberBinding="{Binding MaGiaoVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Tên GV" DisplayMemberBinding="{Binding TenGiaoVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Mã GV" DisplayMemberBinding="{Binding MaGV,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Tên GV" DisplayMemberBinding="{Binding HoTen,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Width="148" Header="SĐT" DisplayMemberBinding="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
@@ -379,8 +396,9 @@
                         </Grid.RowDefinitions>
                         <TextBox
                                 Grid.Row="0" Grid.Column="0" Margin="10 0 8 0"
+                            IsEnabled="False"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding SelectedTS.SBD}">
+                                Text="{Binding SelectedTS.SoBaoDanh}">
                             <materialDesign:HintAssist.Hint>
                                 <StackPanel
                                       Orientation="Horizontal"
@@ -395,6 +413,7 @@
                         </TextBox>
                         <TextBox
                                 Grid.Row="1" Grid.Column="0" Margin="10 0 8 0"
+                            IsEnabled="False"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding SelectedTS.HoTen}">
                             <materialDesign:HintAssist.Hint>

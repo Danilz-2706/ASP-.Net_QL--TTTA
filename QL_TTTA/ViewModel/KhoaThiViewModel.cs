@@ -151,18 +151,6 @@ namespace QL_TTTA.ViewModel
                 var ktn = new KhoaThi() { TenKhoaThi = AddTenKT, NgayThi = (DateTime)AddNgayThi, MaKhoaThi =AddTenKT};
                 khoaThiRepository.Add(ktn);
                 CloseThem(p);
-                //try
-                //{
-                //    var ptn = new PhongThi() { TenPhong = AddTenPhong, MaKhoaThi = AddSelectedKhoaThi.MaKhoaThi,  MaTrinhDo = AddSelectedTrinhDo.TenTrinhDo, ThoiGianBatDau = (DateTime)AddGioBatDau, ThoiGianKetThuc = (DateTime)AddGioKetThuc };
-                //    phongThiRepository.Add(ptn);
-                //    //MessageBox.Show($"Bạn đã thêm phòng thi mới: \n Tên phòng {ptn.TenPhong} - Trình độ: {ptn.TenTrinhDo} - Số lượng: {ptn.SoLuong}");
-
-                //}
-                //catch (Exception e)
-                //{
-                //    MessageBox.Show($"Lỗi ở thêm Phòng. \n Lỗi: + {e}");
-                //}
-
             });
         }
         #endregion    

@@ -40,5 +40,25 @@ namespace Infrastructure.Persistence.Service
                             ).ToList();
             return list;
         }
+
+        public IEnumerable<GiaoVien> GetGVByPhong(string maPhong)
+        {
+            var list = (from ct in context.CanhThis
+                        where ct.MaPhongThi.Equals(maPhong)
+                        from gv in context.GiaoViens
+                        where gv.MaGV.Equals(ct.MaGV)
+                        from pt in context.PhongThis
+                        where pt.MaPhongThi.Equals(ct.MaPhongThi)
+                        select new GiaoVien
+                        {
+                            MaGV = gv.MaGV,
+                            HoTen = gv.HoTen,
+                            SDT = gv.SDT,
+                            Email = gv.Email
+                        }
+                            ).ToList();
+            return list;
+        }
+
     }
 }

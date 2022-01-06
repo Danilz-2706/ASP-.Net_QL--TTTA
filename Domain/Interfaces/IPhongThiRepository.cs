@@ -8,5 +8,6 @@ namespace Domain.Interfaces
     public interface IPhongThiRepository : IEFRepository<PhongThi>
     {
         public IEnumerable<ThiSinh> GetTSByPhong(string maPhong);
+        public IEnumerable<GiaoVien> GetGVByPhong(string maPhong);
     }
 }

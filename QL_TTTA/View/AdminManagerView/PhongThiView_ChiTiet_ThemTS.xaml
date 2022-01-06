@@ -51,6 +51,7 @@
                             BorderBrush="#C4C4C4"
                             Background="#C4C4C4"
                             Foreground="#000"
+                    IsEnabled="False"
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Width="100"
                             Margin="0 0 20 0"
@@ -103,6 +104,7 @@
                                     Style="{StaticResource fontsizeTextBlock}"></TextBlock>
                     <Grid Grid.Column="1" Background="#fff" Height="30" HorizontalAlignment="Stretch">
                         <TextBox
+                                    Text="{Binding ListFilterSBD, UpdateSourceTrigger=PropertyChanged}"
                                     materialDesign:HintAssist.Hint="Search"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"
@@ -130,14 +132,16 @@
 
                 <!--//List Thí Sinh//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding ListTS}" SelectedItem="{Binding SelectedItemTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding ListSBD}" 
+                              SelectedItem="{Binding SelectedItemTS}"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.View>
                             <GridView>
-
                                 <GridView.Columns>
+                                    <GridViewColumn Header="SBD" DisplayMemberBinding="{Binding SBD}"></GridViewColumn>
                                     <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
-                                    <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
-                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Khóa thi" DisplayMemberBinding="{Binding MaKhoaThi}"></GridViewColumn>
+                                    <GridViewColumn Header="Trình độ" DisplayMemberBinding="{Binding MaTrinhDo}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -155,19 +159,27 @@
                             </Grid>
 
                             <Grid Margin="0 16 0 8">
-                                <TextBlock  Text="Tên TS"  Style="{StaticResource textblockName}"/>
+                                <TextBlock  Text="SBD"  Style="{StaticResource textblockName}"/>
 
                                 <TextBox Style="{StaticResource textboxInfo}"
                                              IsEnabled ="False"
-                                             Text="{Binding HoTenTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                             Text="{Binding SobaodanhTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </Grid>
 
                             <Grid Margin="0 16 0 8">
-                                <TextBlock  Text="SĐT"  Style="{StaticResource textblockName}"/>
+                                <TextBlock  Text="Khóa thi"  Style="{StaticResource textblockName}"/>
 
                                 <TextBox Style="{StaticResource textboxInfo}"
                                              IsEnabled ="False"
-                                             Text="{Binding SDTTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
+                                             Text="{Binding KhoaThiTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            </Grid>
+
+                            <Grid Margin="0 16 0 8">
+                                <TextBlock  Text="Trình độ"  Style="{StaticResource textblockName}"/>
+
+                                <TextBox Style="{StaticResource textboxInfo}"
+                                             IsEnabled ="False"
+                                             Text="{Binding TrinhDoTS, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>

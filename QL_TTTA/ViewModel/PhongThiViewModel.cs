@@ -34,8 +34,8 @@ namespace QL_TTTA.ViewModel
         public DateTime? NgayThi { get; set; }
         public string TenTrinhDo { get; set; }
         public string KhoaThi { get; set; }
-        public ICollection<GiaoVien> SelectedPhanBoGiaoVien { get; set; }
-
+        public ObservableCollection<GiaoVien> SelectedPhanBoGiaoVien { get; set; }
+        
         private PhongThi _SelectedItem;
         public PhongThi SelectedItem
         {
@@ -46,14 +46,16 @@ namespace QL_TTTA.ViewModel
                 if (SelectedItem != null)
                 {
                     MaPhong = SelectedItem.MaPhongThi;
-                    //if(SelectedItem.ThamGiaDuThis.Count() >= 0) { SoLuong = SelectedItem.ThamGiaDuThis.Count(); }
                     
                     TenPhong = SelectedItem.TenPhong;
                     NgayThi = SelectedItem.ThoiGianBatDau;
                     TenTrinhDo = SelectedItem.MaTrinhDo;
                     KhoaThi = SelectedItem.MaKhoaThi;
 
-                    SelectedPhanBoThiSinh = SelectedItem.ThamGiaDuThis;
+                    SelectedPhanBoGiaoVien = new ObservableCollection<GiaoVien>(phongThiRepository.GetGVByPhong(SelectedItem.MaPhongThi).ToList());
+
+                    SelectedPhanBoThiSinh = new ObservableCollection<ThiSinh>(phongThiRepository.GetTSByPhong(SelectedItem.MaPhongThi).ToList());
+                    SoLuong = SelectedPhanBoThiSinh.Count();
                 }
             }
         }
@@ -75,11 +77,11 @@ namespace QL_TTTA.ViewModel
 
         // Các biến ở PhongThiView_ChiTiet //
         #region
-        public ICollection<ThamGiaDuThi> SelectedPhanBoThiSinh { get; set; }
+        public ObservableCollection<ThiSinh> SelectedPhanBoThiSinh { get; set; }
         public TrinhDo SelectedTrinhDo { get; set; }
         public KhoaThi SelectedKhoaThi { get; set; }
-        private ThamGiaDuThi _SelectedTS;
-        public ThamGiaDuThi SelectedTS
+        private ThiSinh _SelectedTS;
+        public ThiSinh SelectedTS
         {
             get => _SelectedTS;
             set
@@ -87,10 +89,16 @@ namespace QL_TTTA.ViewModel
                 _SelectedTS = value;
                 if(_SelectedTS != null)
                 {
-                    DiemNghe = _SelectedTS.Nghe;
-                    DiemNoi = _SelectedTS.Noi;
-                    DiemDoc = _SelectedTS.Doc;
-                    DiemViet = _SelectedTS.Viet;
+                    foreach( var i in _listTDT)
+                    {
+                        if(i.SBD == SelectedTS.SoBaoDanh && i.MaPhongThi == SelectedItem.MaPhongThi)
+                        {
+                            DiemNghe = i.Nghe;
+                            DiemNoi = i.Noi;
+                            DiemDoc = i.Doc;
+                            DiemViet = i.Viet;
+                        }
+                    }
                 }
             }
         }
@@ -104,10 +112,9 @@ namespace QL_TTTA.ViewModel
 
         // Các biến ở PhongThiView_ChiTiet_ThemGV //
         #region
-        public int MaGiaoVien { get; set; }
-        public string TenGiaoVien { get; set; }
-        public string SDT { get; set; }
-        public ObservableCollection<GiaoVien> ListGiaovien { get; set; }
+        public int MaGV { get; set; }
+        public string HoTenGV { get; set; }
+        public string SDTGV { get; set; }
         private GiaoVien _SelectedItemGiaoVien;
         public GiaoVien SelectedItemGiaoVien
         {
@@ -117,9 +124,9 @@ namespace QL_TTTA.ViewModel
                 _SelectedItemGiaoVien = value;
                 if (_SelectedItemGiaoVien != null)
                 {
-                    MaGiaoVien = _SelectedItemGiaoVien.MaGV;
-                    TenGiaoVien = _SelectedItemGiaoVien.HoTen;
-                    SDT = _SelectedItemGiaoVien.SDT;
+                    MaGV = _SelectedItemGiaoVien.MaGV;
+                    HoTenGV = _SelectedItemGiaoVien.HoTen;
+                    SDTGV = _SelectedItemGiaoVien.SDT;
                 }
             }
         }
@@ -128,20 +135,27 @@ namespace QL_TTTA.ViewModel
 
         // Các biến ở PhongThiView_ChiTiet_NhapDiem //
         #region
-        private ThamGiaDuThi _SelectedTSDiem;
-        public ThamGiaDuThi SelectedTSDiem
+        public int? AddDiemNghe { get; set; }
+        public int? AddDiemNoi { get; set; }
+        public int? AddDiemDoc { get; set; }
+        public int? AddDiemViet { get; set; }
+        public ObservableCollection<SoBaoDanh> ListTSNhapDiem { get; set; }
+        private ThiSinh _SelectedTSDiem;
+        public ThiSinh SelectedTSDiem
         {
             get => _SelectedTSDiem;
             set
             {
-                _SelectedTS = value;
-                if (_SelectedTS != null)
-                {
-                    DiemNghe = _SelectedTSDiem.Nghe;
-                    DiemNoi = _SelectedTSDiem.Noi;
-                    DiemDoc = _SelectedTSDiem.Doc;
-                    DiemViet = _SelectedTSDiem.Viet;
-                }
+                _SelectedTSDiem = value;
+            }
+        }
+        private SoBaoDanh _SelectedTSNhapDiem;
+        public SoBaoDanh SelectedTSNhapDiem
+        {
+            get => _SelectedTSNhapDiem;
+            set
+            {
+                _SelectedTSNhapDiem = value;
             }
         }
         #endregion
@@ -149,8 +163,9 @@ namespace QL_TTTA.ViewModel
         // Các biến ở PhongThiView_ChiTiet_ThemTS //
         #region
         public string CMNDTS { get; set; }
-        public string HoTenTS { get; set; }
-        public string SDTTS { get; set; }
+        public string SobaodanhTS { get; set; }
+        public string KhoaThiTS { get; set; }
+        public string TrinhDoTS { get; set; }
 
         public ObservableCollection<SoBaoDanh> ListTS { get; set; }
         private SoBaoDanh _SelectedItemTS;
@@ -163,8 +178,9 @@ namespace QL_TTTA.ViewModel
                 if (_SelectedItemTS != null)
                 {
                     CMNDTS = _SelectedItemTS.CMND;
-                    //HoTenTS = _SelectedItemTS.HoTen;
-                    //SDTTS = _SelectedItemTS.SDT;
+                    SobaodanhTS = _SelectedItemTS.SBD;
+                    KhoaThiTS = _SelectedItemTS.SBD;
+                    TrinhDoTS = _SelectedItemTS.SBD;
                 }
             }
         }
@@ -229,8 +245,16 @@ namespace QL_TTTA.ViewModel
         private ObservableCollection<PhongThi> _listPhongThi { get; set; }
         public ICollectionView ListPhongThi { get; set; }
 
+        private ObservableCollection<SoBaoDanh> _listSBD { get; set; }
+        public ICollectionView ListSBD { get; set; }
+
+        private ObservableCollection<ThamGiaDuThi> _listTDT { get; set; }
+
+        private ObservableCollection<GiaoVien> _listGV { get; set; }
+        public ICollectionView ListGV { get; set; }
         //Các công đoạn để Tìm Kiếm//
         #region
+        //Danh sách phòng
         private string _listFilter = string.Empty;
 
         public string ListFilter
@@ -247,6 +271,39 @@ namespace QL_TTTA.ViewModel
             if (obj is PhongThi pt) return pt.TenPhong.Contains(ListFilter, StringComparison.InvariantCultureIgnoreCase);
             return false;
         }
+        //Danh sách số báo danh
+        private string _listFilterSBD = string.Empty;
+        public string ListFilterSBD
+        {
+            get => _listFilterSBD;
+            set
+            {
+                _listFilterSBD = value;
+                ListSBD.Refresh();
+            }
+        }
+        private bool FilterSBD(object obj)
+        {
+            if (obj is SoBaoDanh pt) return pt.CMND.Contains(ListFilterSBD, StringComparison.InvariantCultureIgnoreCase) || pt.SBD.Contains(ListFilterSBD, StringComparison.InvariantCultureIgnoreCase)||
+                    pt.MaKhoaThi.Contains(ListFilterSBD, StringComparison.InvariantCultureIgnoreCase) || pt.MaTrinhDo.Contains(ListFilterSBD, StringComparison.InvariantCultureIgnoreCase);
+            return false;
+        }
+        //Danh sách giáo viên
+        private string _listFilterGV = string.Empty;
+        public string ListFilterGV
+        {
+            get => _listFilterGV;
+            set
+            {
+                _listFilterGV = value;
+                ListGV.Refresh();
+            }
+        }
+        private bool FilterGV(object obj)
+        {
+            if (obj is GiaoVien pt) return pt.HoTen.Contains(ListFilterGV, StringComparison.InvariantCultureIgnoreCase);
+            return false;
+        }
         #endregion
         public PhongThiViewModel(IPhongThiRepository phongThiRepository, ITrinhDoRepository trinhDoRepository, IKhoaThiRepository khoaThiRepository, 
             IGiaoVienRepository giaoVienRepository, ICanhThiRepository canhThiRepository, IThamGiaDuThiRepository thamGiaDuThiRepository, IThiSinhRepository thiSinhRepository, ISoBaoDanhRepository soBaoDanhRepository)
@@ -258,6 +315,7 @@ namespace QL_TTTA.ViewModel
             this.thiSinhRepository = thiSinhRepository;
             this.trinhDoRepository = trinhDoRepository;
             this.soBaoDanhRepository = soBaoDanhRepository;
+            this.giaoVienRepository = giaoVienRepository;
 
             Load();
             #region Các command
@@ -267,7 +325,6 @@ namespace QL_TTTA.ViewModel
 
             Details = new RelayCommand<object>(p => { return SelectedItem != null; }, p => ChiTietPT());
             XoaGV();
-            XoaTS();
             CapNhapDiem();
             CapNhapThongTinPhong();
             Close_PhongChiTiet = new RelayCommand<object>(p => true, p => CloseChiTiet(p));
@@ -281,9 +338,11 @@ namespace QL_TTTA.ViewModel
             Close_PhongThemTS = new RelayCommand<object>(p => true, p => ClosePhongThemTS(p));
 
             PhongNhapDiemNhieuTS = new RelayCommand<object>(p => true, p => NhapDiem());
+            NhapDiemMoi();
             CloseDiem = new RelayCommand<object>(p => true, p => CloseNhapDiem(p));
             #endregion
         }
+
         //Load lại danh sách
         #region
         private void Load()
@@ -299,7 +358,6 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_Them x = new PhongThiView_Them();
             x.DataContext = this;
-            
             ListTrinhDo = new ObservableCollection<TrinhDo>(trinhDoRepository.GetAll());
             ListKhoaThi = new ObservableCollection<KhoaThi>(khoaThiRepository.GetAll());
             x.ShowDialog();
@@ -315,37 +373,25 @@ namespace QL_TTTA.ViewModel
             AddGioKetThuc = null;
             AddGioBatDau = null;
             AddSelectedKhoaThi = null;
-            AddSoLuong = 0;
             Load();
 
         }
         private void AddNew()
         {
             //Reset
-            Reset = new RelayCommand<PhongThiView_Them>(p => { return true; }, p => { AddSelectedTrinhDo = null;  AddSelectedKhoaThi = null; AddSoLuong = 0; AddGioBatDau = null; AddGioKetThuc = null; });
+            Reset = new RelayCommand<PhongThiView_Them>(p => { return true; }, p => { AddSelectedTrinhDo = null;  AddSelectedKhoaThi = null;  AddGioBatDau = null; AddGioKetThuc = null; });
 
             //Save
             Save = new RelayCommand<PhongThiView_Them>(p =>
             {
-                return  AddSelectedTrinhDo != null && AddSelectedKhoaThi != null && AddSoLuong > 0 && AddGioBatDau < AddGioKetThuc ;
+                return  AddSelectedTrinhDo != null && AddSelectedKhoaThi != null && AddGioBatDau < AddGioKetThuc ;
             }, p =>
             {
                 AddTenPhong = AddSelectedTrinhDo.TenTrinhDo + "P" + _listPhongThi.Count().ToString();
                 var ptn = new PhongThi() {MaPhongThi = AddTenPhong, TenPhong = AddTenPhong, MaKhoaThi = AddSelectedKhoaThi.MaKhoaThi, MaTrinhDo = AddSelectedTrinhDo.TenTrinhDo, ThoiGianBatDau = (DateTime)AddGioBatDau, ThoiGianKetThuc = (DateTime)AddGioKetThuc };
                 phongThiRepository.Add(ptn);
                 CloseThem(p);
-                //try
-                //{
-                //    var ptn = new PhongThi() { TenPhong = AddTenPhong, MaKhoaThi = AddSelectedKhoaThi.MaKhoaThi,  MaTrinhDo = AddSelectedTrinhDo.TenTrinhDo, ThoiGianBatDau = (DateTime)AddGioBatDau, ThoiGianKetThuc = (DateTime)AddGioKetThuc };
-                //    phongThiRepository.Add(ptn);
-                //    //MessageBox.Show($"Bạn đã thêm phòng thi mới: \n Tên phòng {ptn.TenPhong} - Trình độ: {ptn.TenTrinhDo} - Số lượng: {ptn.SoLuong}");
-
-                //}
-                //catch (Exception e)
-                //{
-                //    MessageBox.Show($"Lỗi ở thêm Phòng. \n Lỗi: + {e}");
-                //}
-
+                MessageBox.Show($"Thêm thành công phòng thì: {AddTenPhong} - Thời gian bắt đầu: {AddGioBatDau} - Thời gian kết thúc: {AddGioKetThuc}");
             });
         }
         #endregion
@@ -356,23 +402,20 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_ChiTiet x = new PhongThiView_ChiTiet();
             x.DataContext = this;
-            SelectedPhanBoThiSinh = SelectedItem.ThamGiaDuThis;
+            SelectedPhanBoThiSinh = new ObservableCollection<ThiSinh>(phongThiRepository.GetTSByPhong(SelectedItem.MaPhongThi).ToList());
+            SelectedPhanBoGiaoVien = new ObservableCollection<GiaoVien>(phongThiRepository.GetGVByPhong(SelectedItem.MaPhongThi).ToList());
+            _listTDT = new ObservableCollection<ThamGiaDuThi>(thamGiaDuThiRepository.GetAll());
             x.ShowDialog();
         }
         private void CloseChiTiet(object obj)
         {
             PhongThiView_ChiTiet x = obj as PhongThiView_ChiTiet;
             x.Close();
-            //ListPhongThi = new ObservableCollection<PhongThi>();
+            SoLuong = SelectedPhanBoThiSinh.Count();
         }
 
         //Các chức năng ở tại PhongThiView_ChiTiet
         #region
-        private void XoaTS()
-        {
-            PhongXoaTS = new RelayCommand<object>(p => { return SelectedTS != null && SelectedTS.Nghe ==0 && SelectedTS.Noi == 0 && SelectedTS.Doc == 0 && SelectedTS.Viet == 0; },
-                p => { });
-        }
 
         private void XoaGV()
         {
@@ -382,10 +425,6 @@ namespace QL_TTTA.ViewModel
 
         private void CapNhapDiem()
         {
-            Update_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.Nghe || DiemNoi != SelectedTS.Noi || DiemDoc != SelectedTS.Doc || DiemViet != SelectedTS.Viet); },
-                p => {});
-            Undo_Diem = new RelayCommand<object>(p => { return SelectedTS != null && (DiemNghe != SelectedTS.Nghe || DiemNoi != SelectedTS.Noi || DiemDoc != SelectedTS.Doc || DiemViet != SelectedTS.Viet); },
-                p => { });
 
         }
 
@@ -404,40 +443,40 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_ChiTiet_ThemGV x = new PhongThiView_ChiTiet_ThemGV();
             x.DataContext = this;
+            _listGV = new ObservableCollection<GiaoVien>(giaoVienRepository.GetAll());
+            ListGV = CollectionViewSource.GetDefaultView(_listGV);
+            ListGV.Filter = FilterGV;
             x.ShowDialog();
         }
         private void ClosePhongThemGV(object p)
         {
             PhongThiView_ChiTiet_ThemGV x = p as PhongThiView_ChiTiet_ThemGV;
             x.Close();
+            SelectedPhanBoGiaoVien = new ObservableCollection<GiaoVien>(phongThiRepository.GetGVByPhong(SelectedItem.MaPhongThi).ToList());
+
         }
         private void ThemMoiGV()
         {
-            AddGV = new RelayCommand<object>(p => {
+            AddGV = new RelayCommand<PhongThiView_ChiTiet_ThemGV>(p =>
+            {
+                if (SelectedPhanBoGiaoVien.Count() >= 2) return false;
                 if (SelectedItemGiaoVien != null)
                 {
-                    if (SelectedPhanBoGiaoVien.Count() > 0)
+                    if (SelectedPhanBoGiaoVien.Count() == 0) return true;
+                    foreach (var i in SelectedPhanBoGiaoVien)
                     {
-                        foreach (var i in SelectedPhanBoGiaoVien) { if (i.MaGV == SelectedItemGiaoVien.MaGV) return false; }
-                        return true;
-                    } return true;
-                } return false;
-                },
-                p => { });
-
-            AddGVn = new RelayCommand<object>(p => {
-                if (SelectedItemGiaoVien != null)
-                {
-                    if (SelectedPhanBoGiaoVien.Count() > 0)
-                    {
-                        foreach (var i in SelectedPhanBoGiaoVien) { if (i.MaGV == SelectedItemGiaoVien.MaGV) return false; }
-                        return true;
+                        if (i.MaGV == SelectedItemGiaoVien.MaGV) return false;
                     }
                     return true;
                 }
                 return false;
-            },
-                p => { });
+            }, p =>
+            {
+                var ct = new CanhThi() { MaPhongThi = SelectedItem.MaPhongThi, MaGV = SelectedItemGiaoVien.MaGV };
+                canhThiRepository.Add(ct);
+                ClosePhongThemGV(p);
+                MessageBox.Show($"Thêm thành công giáo viên: Mã GV: {SelectedItemGiaoVien.MaGV}");
+            });
         }
         #endregion
 
@@ -447,84 +486,121 @@ namespace QL_TTTA.ViewModel
         {
             PhongThiView_ChiTiet_ThemTS x = new PhongThiView_ChiTiet_ThemTS();
             x.DataContext = this;
-            ListTS = new ObservableCollection<SoBaoDanh>(soBaoDanhRepository.GetAll());
+            _listSBD = new ObservableCollection<SoBaoDanh>(soBaoDanhRepository.GetAll());
+            ListSBD = CollectionViewSource.GetDefaultView(_listSBD);
+            ListSBD.Filter = FilterSBD;
             x.ShowDialog();
         }
         private void ClosePhongThemTS(object p)
         {
             PhongThiView_ChiTiet_ThemTS x = p as PhongThiView_ChiTiet_ThemTS;
             x.Close();
+            SelectedPhanBoThiSinh = new ObservableCollection<ThiSinh>(phongThiRepository.GetTSByPhong(SelectedItem.MaPhongThi).ToList());
+            SoLuong = SelectedPhanBoThiSinh.Count();
+            _listSBD = null;
         }
         private void ThemTSVaoPhong()
         {
             AddTS = new RelayCommand<PhongThiView_ChiTiet_ThemTS>(p =>
             {
-                if (SelectedItemTS != null) return true;
+                if (SoLuong >= 35) return false;
+                if (SelectedItemTS != null)
+                {
+                    if (SelectedItemTS.MaTrinhDo == SelectedItem.MaTrinhDo && SelectedItemTS.MaKhoaThi == SelectedItem.MaKhoaThi)
+                    {
+                    if (SelectedPhanBoThiSinh.Count() == 0) return true;
+                        foreach (var i in SelectedPhanBoThiSinh)
+                        {
+                            if (i.CMND == SelectedItemTS.CMND) return false;
+                        }
+                        return true;
+                    }
+                    return false;
+                }
                 return false;
             }, p =>
             {
-                
                 var tgdt = new ThamGiaDuThi() { MaPhongThi = SelectedItem.MaPhongThi, SBD =SelectedItemTS.SBD };
                 thamGiaDuThiRepository.Add(tgdt);
                 ClosePhongThemTS(p);
-                
-
+                MessageBox.Show($"Thêm thành công thí sinh: SBD: {SelectedItemTS.SBD} - CMND: {SelectedItemTS.CMND}");
             });
-            //AddTSn = new RelayCommand<PhongThiView_ChiTiet_ThemTS>(p =>
-            //{
-            //    if (SelectedItemNhanVien != null)
-            //    {
-            //        if (SelectedPhanBoNhanVienDoan.Count() > 0)
-            //        {
-            //            foreach (var i in SelectedPhanBoNhanVienDoan)
-            //            {
-            //                if (i.MaNhanVien == SelectedItemNhanVien.MaNhanVien || MaNhanVien == 0 || string.IsNullOrEmpty(TenNhanVien) || string.IsNullOrEmpty(NhiemVu)) return false;
-            //            }
-            //            return true;
-            //        }
-            //        return !string.IsNullOrEmpty(NhiemVu);
-            //    }
-            //    else { return false; }
-            //}, p =>
-            //{
-            //    try
-            //    {
-            //        var pbnv = new PhanBoNhanVienDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaNhanVien = SelectedItemNhanVien.MaNhanVien, NhiemVu = NhiemVu };
-            //        if (phanBoNhanVienDoanService.Create(pbnv))
-            //        {
-            //            pbnv.NhanVien = SelectedItemNhanVien;
-            //            MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên: {SelectedItemNhanVien.TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-            //            NhiemVu = null;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Lỗi ở thêm NHÂN VIÊN - Đoàn Du Lịch");
-            //    }
-            //});
-        
         }
-
+        #endregion
         //Các chức năng ở tại PhongThiView_ChiTiet_NhapDiem
         #region
-
         private void CloseNhapDiem(object p)
         {
             PhongThiView_ChiTiet_NhapDiem x = p as PhongThiView_ChiTiet_NhapDiem;
             x.Close();
+            ListTSNhapDiem = null;
+            SelectedTSDiem = null;
         }
-
         private void NhapDiem()
         {
             PhongThiView_ChiTiet_NhapDiem x = new PhongThiView_ChiTiet_NhapDiem();
             x.DataContext = this;
+            ListTSNhapDiem = new ObservableCollection<SoBaoDanh>();
+            SelectedTS = null;
             x.ShowDialog();
         }
-        #endregion
+        private void NhapDiemMoi()
+        {
+            if (SelectedTSDiem != null) { SelectedTSNhapDiem = null; } if (SelectedTSNhapDiem != null) { SelectedTSDiem = null; }
+            AddDiem = new RelayCommand<object>(p =>
+            {
+                if (SelectedTSDiem != null && ListTSNhapDiem.Count() == 0)
+                {
+                    return true;
+                }
+                else if (SelectedTSDiem != null && ListTSNhapDiem.Count() > 0)
+                {
+                    foreach (var i in ListTSNhapDiem) { if (i.SBD == SelectedTSDiem.SoBaoDanh) return false; }
+                    return true;
+                }
+                return false;
+            }, p =>
+            {
+                var capnhapdiem = new SoBaoDanh { SBD = SelectedTSDiem.SoBaoDanh };
+                ListTSNhapDiem.Add(capnhapdiem);
+                SelectedTSDiem = null;
+            });
+            RemoveDiem = new RelayCommand<object>(p =>
+            {
+                if (SelectedTSNhapDiem != null) return true;
+                return false;
+            }, p =>
+            {
+                var capnhapdiem = ListTSNhapDiem.SingleOrDefault(x => x.SBD == SelectedTSNhapDiem.SBD);
+                ListTSNhapDiem.Remove(capnhapdiem);
+                SelectedTSNhapDiem = null;
 
-        #endregion
+            });
+            ResetDiem = new RelayCommand<object>(p =>
+            {
+                if (ListTSNhapDiem.Count() > 0) return true;
+                return false;
+            }, p =>
+            {
+                ListTSNhapDiem = new ObservableCollection<SoBaoDanh>();
+            });
+            SaveDiem = new RelayCommand<object>(p =>
+            {
+                if (SelectedItem!=null && ListTSNhapDiem.Count() > 0 && AddDiemDoc >=0 && AddDiemNghe >= 0 && AddDiemNoi >= 0 && AddDiemViet >= 0) return true;
+                return false;
+            }, p =>
+            {
+                foreach (var i in ListTSNhapDiem)
+                {
+                    var d = new ThamGiaDuThi() {MaPhongThi = SelectedItem.MaPhongThi, SBD = i.SBD, Doc = AddDiemDoc, Nghe = AddDiemNghe, Noi = AddDiemNoi, Viet = AddDiemViet };
 
+                    thamGiaDuThiRepository.Update(d);
+                }
+                CloseNhapDiem(p);
+                MessageBox.Show("Nhập điểm thành công!");
+            });
+        }
+        #endregion
         #endregion
     }
-
 }

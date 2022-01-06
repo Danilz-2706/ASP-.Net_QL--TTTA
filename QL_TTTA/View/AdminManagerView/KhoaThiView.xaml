@@ -36,6 +36,7 @@
                                     Style="{StaticResource fontsizeTextBlock}"></TextBlock>
                     <Grid Grid.Column="1" Background="#fff" Height="30" HorizontalAlignment="Stretch">
                         <TextBox
+                                    Text="{Binding ListFilter, UpdateSourceTrigger=PropertyChanged}"
                                     materialDesign:HintAssist.Hint="Search"
                                     VerticalContentAlignment="Center"
                                     IsEnabled="True"

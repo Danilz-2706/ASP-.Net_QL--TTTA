@@ -91,8 +91,8 @@
             <!--Danh sách địa điểm-->
             <Grid Grid.Column="0">
                 <Border Background="#71DFE7" Width="1" HorizontalAlignment="Right"></Border>
-                <ListView ItemsSource="{Binding SelectedPhanBoThiSinh, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedTSDiem,UpdateSourceTrigger=PropertyChanged}"
+                <ListView ItemsSource="{Binding SelectedPhanBoThiSinh}" 
+                          SelectedItem="{Binding SelectedTSDiem}"
                           ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
@@ -104,9 +104,8 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
-                                <GridViewColumn Width="125" Header="SBD" DisplayMemberBinding="{Binding SBD}"></GridViewColumn>
-                                <GridViewColumn Width="125" Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
-
+                                <GridViewColumn Width="75" Header="SBD" DisplayMemberBinding="{Binding SoBaoDanh}"></GridViewColumn>
+                                <GridViewColumn Width="175" Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -121,8 +120,8 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Border Background="#71DFE7" Width="1" HorizontalAlignment="Left"></Border>
-                    <ListView ItemsSource="{Binding ListTS_Temp}" 
-                              SelectedItem="{Binding SelectedTS_Temp,UpdateSourceTrigger=PropertyChanged}"
+                    <ListView ItemsSource="{Binding ListTSNhapDiem}" 
+                              SelectedItem="{Binding SelectedTSNhapDiem}"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True">
@@ -135,7 +134,7 @@
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
                                     <GridViewColumn Width="125" Header="SBD" DisplayMemberBinding="{Binding SBD}"></GridViewColumn>
-                                    <GridViewColumn Width="125" Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Width="125" Header="CMND" DisplayMemberBinding="{Binding SoBaoDanh.CMND}"></GridViewColumn>
 
                                 </GridView.Columns>
                             </GridView>
@@ -158,7 +157,7 @@
                                 Grid.Row="0" Grid.Column="0" Margin="8 4 8 4"
                                 AcceptsReturn="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding DiemNghe, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding AddDiemNghe, UpdateSourceTrigger=PropertyChanged}">
 
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
@@ -176,7 +175,7 @@
                     <TextBox
                                 Grid.Row="0" Grid.Column="1" Margin="8 4 8 4"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding DiemNoi, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding AddDiemNoi, UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                                       Orientation="Horizontal"
@@ -193,7 +192,7 @@
                     <TextBox
                                 Grid.Row="1" Grid.Column="0" Margin="8 4 8 4"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding DiemDoc, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding AddDiemDoc, UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                                       Orientation="Horizontal"
@@ -210,7 +209,7 @@
                     <TextBox
                                 Grid.Row="1" Grid.Column="1" Margin="8 4 8 4"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding DiemViet, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding AddDiemViet, UpdateSourceTrigger=PropertyChanged}">
                         <materialDesign:HintAssist.Hint>
                             <StackPanel
                                       Orientation="Horizontal"

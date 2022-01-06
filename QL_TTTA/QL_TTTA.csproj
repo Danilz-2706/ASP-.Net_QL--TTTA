@@ -13,6 +13,9 @@
     <None Remove="Assets\Icon\DT1__UI--icon\close.png" />
     <None Remove="Assets\Icon\DT1__UI--icon\completed.png" />
     <None Remove="Assets\Icon\DT1__UI--icon\cost.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\icons8-cheque-100.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\images %281%29.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\images.png" />
     <None Remove="Assets\Icon\DT1__UI--icon\menu-hover.png" />
     <None Remove="Assets\Icon\DT1__UI--icon\menu.png" />
     <None Remove="Assets\Icon\DT1__UI--icon\Moving.png" />
@@ -54,6 +57,9 @@
     <Resource Include="Assets\Icon\DT1__UI--icon\close.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\completed.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\cost.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\icons8-cheque-100.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\images (1).png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\images.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\menu-hover.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\menu.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\Moving.png" />

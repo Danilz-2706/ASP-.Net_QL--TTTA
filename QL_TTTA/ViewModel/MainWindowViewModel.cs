@@ -20,7 +20,7 @@ namespace QL_TTTA.ViewModel
             ObservableCollection<MenuItems> menuItems = new ObservableCollection<MenuItems>
             {
                 new MenuItems { MenuName = "Admin", MenuImage = @"Assets/Icon/DT1__UI--icon/Admin.png" },
-                new MenuItems { MenuName = "Register", MenuImage = @"Assets/Icon/DT1__UI--icon/tour.png" }
+                new MenuItems { MenuName = "Register", MenuImage = @"Assets/Icon/DT1__UI--icon/icons8-cheque-100.png" }
             };
 
             MenuItemsCollection = new CollectionViewSource { Source = menuItems };

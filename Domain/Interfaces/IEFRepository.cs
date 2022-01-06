@@ -13,7 +13,7 @@ namespace Domain.Interfaces
 
         void Update(T entity);
 
-        void Update(T entity, int id);
+        void Update(T entity, params object[] keyValues);
 
         void Delete(T entity);
     }

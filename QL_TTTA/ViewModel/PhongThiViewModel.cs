@@ -405,6 +405,10 @@ namespace QL_TTTA.ViewModel
             SelectedPhanBoThiSinh = new ObservableCollection<ThiSinh>(phongThiRepository.GetTSByPhong(SelectedItem.MaPhongThi).ToList());
             SelectedPhanBoGiaoVien = new ObservableCollection<GiaoVien>(phongThiRepository.GetGVByPhong(SelectedItem.MaPhongThi).ToList());
             _listTDT = new ObservableCollection<ThamGiaDuThi>(thamGiaDuThiRepository.GetAll());
+            DiemDoc = null;
+            DiemNghe = null;
+            DiemViet = null;
+            DiemNoi = null;
             x.ShowDialog();
         }
         private void CloseChiTiet(object obj)
@@ -496,6 +500,8 @@ namespace QL_TTTA.ViewModel
             PhongThiView_ChiTiet_ThemTS x = p as PhongThiView_ChiTiet_ThemTS;
             x.Close();
             SelectedPhanBoThiSinh = new ObservableCollection<ThiSinh>(phongThiRepository.GetTSByPhong(SelectedItem.MaPhongThi).ToList());
+            _listTDT = new ObservableCollection<ThamGiaDuThi>(thamGiaDuThiRepository.GetAll());
+
             SoLuong = SelectedPhanBoThiSinh.Count();
             _listSBD = null;
         }
@@ -504,7 +510,7 @@ namespace QL_TTTA.ViewModel
             AddTS = new RelayCommand<PhongThiView_ChiTiet_ThemTS>(p =>
             {
                 if (SoLuong >= 35) return false;
-                if (SelectedItemTS != null)
+                if (SelectedItemTS != null && SelectedItem!=null)
                 {
                     if (SelectedItemTS.MaTrinhDo == SelectedItem.MaTrinhDo && SelectedItemTS.MaKhoaThi == SelectedItem.MaKhoaThi)
                     {
@@ -527,6 +533,7 @@ namespace QL_TTTA.ViewModel
             });
         }
         #endregion
+        
         //Các chức năng ở tại PhongThiView_ChiTiet_NhapDiem
         #region
         private void CloseNhapDiem(object p)
@@ -535,6 +542,8 @@ namespace QL_TTTA.ViewModel
             x.Close();
             ListTSNhapDiem = null;
             SelectedTSDiem = null;
+            _listTDT = new ObservableCollection<ThamGiaDuThi>(thamGiaDuThiRepository.GetAll());
+
         }
         private void NhapDiem()
         {
@@ -593,8 +602,7 @@ namespace QL_TTTA.ViewModel
                 foreach (var i in ListTSNhapDiem)
                 {
                     var d = new ThamGiaDuThi() {MaPhongThi = SelectedItem.MaPhongThi, SBD = i.SBD, Doc = AddDiemDoc, Nghe = AddDiemNghe, Noi = AddDiemNoi, Viet = AddDiemViet };
-
-                    thamGiaDuThiRepository.Update(d);
+                    thamGiaDuThiRepository.Update(d, i.SBD, SelectedItem.MaPhongThi);
                 }
                 CloseNhapDiem(p);
                 MessageBox.Show("Nhập điểm thành công!");

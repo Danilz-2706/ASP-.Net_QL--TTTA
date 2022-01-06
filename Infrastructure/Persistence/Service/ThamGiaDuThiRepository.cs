@@ -11,14 +11,5 @@ namespace Infrastructure.Persistence.Service
         public ThamGiaDuThiRepository(CenterContext context) : base(context)
         {
         }
-
-        public override void Update(ThamGiaDuThi entity, int id)
-        {
-            ThamGiaDuThi exist = context.Set<ThamGiaDuThi>().Find(id);
-            context.Entry(exist).State = EntityState.Detached;
-            context.Entry(exist).CurrentValues.SetValues(entity);
-            context.Entry(exist).State = EntityState.Modified;
-            context.SaveChanges();
-        }
     }
 }

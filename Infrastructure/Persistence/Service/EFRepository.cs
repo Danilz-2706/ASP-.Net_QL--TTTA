@@ -39,9 +39,9 @@ namespace Infrastructure.Persistence.Service
             context.SaveChanges();
         }
 
-        public virtual void Update(T entity, int id)
+        public void Update(T entity, params object[] keyValues)
         {
-            T exist = context.Set<T>().Find(id);
+            T exist = context.Set<T>().Find(keyValues);
             context.Entry(exist).CurrentValues.SetValues(entity);
             context.SaveChanges();
         }

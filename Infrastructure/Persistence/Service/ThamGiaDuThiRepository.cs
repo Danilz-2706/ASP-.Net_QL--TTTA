@@ -10,5 +10,11 @@ namespace Infrastructure.Persistence.Service
         public ThamGiaDuThiRepository(CenterContext context) : base(context)
         {
         }
+
+        public override void Update(ThamGiaDuThi entity, int id)
+        {
+            context.ChangeTracker.Clear();
+            base.Update(entity, id);
+        }
     }
 }
